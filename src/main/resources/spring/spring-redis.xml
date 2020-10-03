@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <!--Redis连接池的设置-->
+    <bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">
+        <!--控制一个pool可分配多少个jedis实例-->
+        <property name="maxTotal" value="${redis.pool.maxActive}"/>
+        <property name="maxIdle" value="${redis.pool.maxIdle}"/>
+        <property name="maxWaitMillis" value="${redis.pool.maxWait}"/>
+        <property name="testOnBorrow" value="${redis.pool.testOnBorrow}"/>
+    </bean>
+    <!--封装JedisPool连接池对象，并做相关配置-->
+    <bean id="jedisPoolWrapper" class="ssm.wjx.cache.JedisPoolWrapper" depends-on="jedisPoolConfig">
+        <constructor-arg name="jedisPoolConfig" ref="jedisPoolConfig"/>
+        <constructor-arg name="host" value="${redis.hostname}" type="java.lang.String"/>
+        <constructor-arg name="port" value="${redis.port}" type="int"/>
+    </bean>
+    <!--创建Redis工具类，封装好Redis的连接以进行相关的操作-->
+    <bean id="jedisUtil" class="ssm.wjx.cache.JedisUtil" scope="prototype">
+        <property name="jedisPool" ref="jedisPoolWrapper"/>
+    </bean>
+    <!--内部类对象放入IOC 外部类$内部类-->
+    <bean id="jedisKeys" class="ssm.wjx.cache.JedisUtil$Keys">
+        <constructor-arg ref="jedisUtil"/>
+    </bean>
+    <bean id="jedisStrings" class="ssm.wjx.cache.JedisUtil$Strings"/>
+</beans>
