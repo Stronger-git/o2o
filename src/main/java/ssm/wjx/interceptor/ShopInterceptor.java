@@ -18,7 +18,7 @@ public class ShopInterceptor extends HandlerInterceptorAdapter {
         if (user != null) {
             // 对用户身份进行判断
             PersonInfo user0 = (PersonInfo) user;
-            if (user0 != null && user0.getUserId() != null && user0.getUserType() == 2 && user0.getEnableStatus() == 1) {
+            if (user0.getUserId() != null && user0.getUserType() == 2 && user0.getEnableStatus() == 1) {
                 // 验证成功则返回true 放行
                 return true;
             }

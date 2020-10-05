@@ -16,10 +16,10 @@ public class AreaServiceTest extends BaseTest {
 
     @Autowired
     private AreaService areaService;
+
     @Test
     public void testGetAreaList() {
         List<Area> areaList = areaService.getAreaList();
-        Assert.assertNull(areaList);
-
+        Assert.assertNotNull(areaList);
     }
 }

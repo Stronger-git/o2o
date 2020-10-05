@@ -109,6 +109,19 @@ public class JedisUtil {
             return state;
         }
 
+        /**
+         * 将value关联到key并设置过期时间
+         * @param key
+         * @param seconds
+         * @return
+         */
+        public String expire(String key, int seconds, String value) {
+            Jedis jedis = getJedis();
+            String state = jedis.setex(key, seconds, value);
+            jedis.close();
+            return state;
+        }
+
         public String set(byte[] key, byte[] value) {
             Jedis jedis = getJedis();
             String state = jedis.set(key, value);

@@ -5,6 +5,7 @@ import ssm.wjx.entity.Headline;
 import java.util.List;
 
 public interface HeadlineService {
-    public static final String HEADLINE_KEY = "headline";
+    String HEADLINE_KEY = "headline";
+    int expire = 18000;
     List<Headline> getHeadlineList(Headline headline);
 }

@@ -17,7 +17,7 @@
         <constructor-arg name="port" value="${redis.port}" type="int"/>
     </bean>
     <!--创建Redis工具类，封装好Redis的连接以进行相关的操作-->
-    <bean id="jedisUtil" class="ssm.wjx.cache.JedisUtil" scope="prototype">
+    <bean id="jedisUtil" class="ssm.wjx.cache.JedisUtil">
         <property name="jedisPool" ref="jedisPoolWrapper"/>
     </bean>
     <!--内部类对象放入IOC 外部类$内部类-->

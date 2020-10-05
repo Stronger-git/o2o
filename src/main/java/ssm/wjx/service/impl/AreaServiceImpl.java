@@ -26,7 +26,7 @@ public class AreaServiceImpl implements AreaService {
     private JedisUtil.Keys jedisKeys;
     @Autowired
     private JedisUtil.Strings jedisStrings;
-    public static final String AREAS_KEY = "areas";
+
     /**
      * 引入缓存技术
      * @date 2020 3/13 9:59
@@ -50,7 +50,7 @@ public class AreaServiceImpl implements AreaService {
                     loger.error(e.getMessage());
                     throw new RuntimeException(e);
                 }
-                jedisStrings.set(key, value);
+                jedisStrings.expire(key, expire, value);
             }
         } else {
             objectMapper = new ObjectMapper();

@@ -22,7 +22,7 @@ public class ShopPermissionInterceptor extends HandlerInterceptorAdapter {
         if (currentShop != null && shopList != null) {
             for (Shop shop : shopList) {
                 // 如果当前店铺在可操作性的列表里则返回true，进行接下来的操作
-                if (shop.getShopId() == currentShop.getShopId()) {
+                if (shop.getShopId().equals(currentShop.getShopId())) {
                     return true;
                 }
             }

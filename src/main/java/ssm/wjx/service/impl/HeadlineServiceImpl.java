@@ -42,7 +42,7 @@ public class HeadlineServiceImpl implements HeadlineService {
                     e.printStackTrace();
                     throw new RuntimeException(e);
                 }
-                jedisStrings.set(key, value);
+                jedisStrings.expire(key, expire, value);
             }
         } else {
             mapper = new ObjectMapper();
